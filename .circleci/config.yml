@@ -28,7 +28,7 @@ jobs:
       # - run:
       #     name: Unit Tests Execution
       #     command: ./objdump/unit_tests.out
-        - run:
+      - run:
           name: Run Program
           command: ./nm
 
