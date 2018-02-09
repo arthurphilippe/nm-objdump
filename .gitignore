@@ -5,3 +5,7 @@
 vgcore*
 *.log
 .vscode/
+my_nm
+my_objdump
+nm/nm
+objdump/objdump
