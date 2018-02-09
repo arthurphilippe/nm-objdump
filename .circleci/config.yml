@@ -22,12 +22,12 @@ jobs:
     steps:
       - restore_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - run:
-          name: Unit Tests Execution
-          command: ./nm/unit_tests.out
-      - run:
-          name: Unit Tests Execution
-          command: ./objdump/unit_tests.out
+      # - run:
+      #     name: Unit Tests Execution
+      #     command: ./nm/unit_tests.out
+      # - run:
+      #     name: Unit Tests Execution
+      #     command: ./objdump/unit_tests.out
         - run:
           name: Run Program
           command: ./nm
@@ -37,6 +37,6 @@ workflows:
   build_and_test:
     jobs:
       - build
-      # - test:
-      #     requires:
-      #       - build
+      - test:
+          requires:
+            - build
