@@ -1,56 +1,51 @@
 ##
 ## EPITECH PROJECT, 2018
-## nanotekspice
+## nmobjdump
 ## File description:
-## Makefile
+## makefile
 ##
-
-CC		=	gcc
 
 RM		=	rm -vf
 
-NAME		=	nm
+NM		=	my_nm
 
-MAIN		=	src/main.c
-
-SRCS		=
-
-OBJ_MAIN	=	$(MAIN:.cpp=.o)
-
-OBJS		=	$(SRCS:.cpp=.o)
-
-TEST		=	unit_tests.out
-
-SRCS_TEST	=
-
-SRCS_TEST	+=	$(OBJS)
-
-OBJS_TEST	=	$(SRCS_TEST:.cpp=.o)
+OBJDUMP		=	my_objdump
 
 CFLAGS		=	-W -Wextra -Wall -Iinclude/
 
-all: $(NAME)
+ifndef VERBOSE
+	MAKEFLAGS	+=	--no-print-directory
+endif
+
+
+all: $(NM) $(OBJDUMP)
 
 debug: CPPFLAGS += -ggdb
 debug: fclean
 debug: $(NAME)
 
-tests: CXX=g++
+tests: CC=gcc
 tests: $(TEST)
 
 tests_run: tests
 	@./$(TEST)
 
-$(NAME): $(OBJ_MAIN) $(OBJS)
-	@$(CXX) $(OBJ_MAIN) $(OBJS) -o $(NAME)
-	@echo " --> $(NAME) built!"
+$(NM):
+	@$(MAKE) -C nm/
+	ln -f nm/nm $(NM)
 
-$(TEST): $(OBJS_TEST)
-	@$(CXX) $(OBJS_TEST) -o $(TEST) -lcriterion
-	@echo " --> $(TEST) built!"
+$(OBJDUMP):
+	@$(MAKE) -C objdump/
+	ln -f objdump/objdump $(OBJDUMP)
+
 clean:
+	@$(MAKE) clean -C nm/
+	@$(MAKE) clean -C objdump/
 
-fclean: clean
+fclean:
+	@$(MAKE) fclean -C nm/
+	@$(MAKE) fclean -C objdump/
+	@$(RM) $(NM) $(OBJDUMP)
 
 re: fclean all
 

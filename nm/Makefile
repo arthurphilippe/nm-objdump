@@ -15,9 +15,9 @@ MAIN		=	src/main.c
 
 SRCS		=
 
-OBJ_MAIN	=	$(MAIN:.cpp=.o)
+OBJ_MAIN	=	$(MAIN:.c=.o)
 
-OBJS		=	$(SRCS:.cpp=.o)
+OBJS		=	$(SRCS:.c=.o)
 
 TEST		=	unit_tests.out
 
@@ -25,13 +25,13 @@ SRCS_TEST	=
 
 SRCS_TEST	+=	$(OBJS)
 
-OBJS_TEST	=	$(SRCS_TEST:.cpp=.o)
+OBJS_TEST	=	$(SRCS_TEST:.c=.o)
 
 CFLAGS		=	-W -Wextra -Wall -Iinclude/
 
 all: $(NAME)
 
-debug: CPPFLAGS += -ggdb
+debug: CFLAGS += -ggdb
 debug: fclean
 debug: $(NAME)
 
@@ -48,8 +48,9 @@ $(NAME): $(OBJ_MAIN) $(OBJS)
 $(TEST): $(OBJS_TEST)
 	@$(CXX) $(OBJS_TEST) -o $(TEST) -lcriterion
 	@echo " --> $(TEST) built!"
+
 clean:
-	@$(RM) $(OBJS) $(OBJS_TEST)
+	@$(RM) $(OBJ_MAIN) $(OBJS) $(OBJS_TEST)
 
 fclean: clean
 	@$(RM) $(NAME) $(TEST)
