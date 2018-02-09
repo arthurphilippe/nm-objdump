@@ -9,6 +9,7 @@
 
 const int EXIT_FAILURE = 1;
 const int EXIT_SUCCESS = 0;
+const int RETURN_ERROR = -1;
 const char *DEFAULT_FILE_NAME = "a.out";
 
 int nm_launcher(int ac, char **av)
@@ -32,5 +33,5 @@ int main(int ac, char **av)
 	} else {
 		ret = nm_launcher(ac, av);
 	}
-	return (ret);
+	return ((ret == RETURN_ERROR) ? EXIT_FAILURE : EXIT_SUCCESS);
 }

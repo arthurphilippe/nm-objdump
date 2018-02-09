@@ -9,8 +9,9 @@
 #include <sys/mman.h>
 #include <fcntl.h>
 #include <stdio.h>
+#include <unistd.h>
 
-int get_map_ptr(void **map, const char *file_name)
+int set_map_ptr(void **map, const char *file_name)
 {
 	int fd = open(file_name, O_RDONLY);
 	struct stat sb;
@@ -24,4 +25,6 @@ int get_map_ptr(void **map, const char *file_name)
 		perror("mmap");
 		return (-1);
 	}
+	close(fd);
+	return (sb.st_size);
 }

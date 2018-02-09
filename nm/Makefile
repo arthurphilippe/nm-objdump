@@ -13,8 +13,8 @@ NAME		=	nm
 
 MAIN		=	src/main.c
 
-SRCS		=	src/nm.c	\
-			src/get_map_ptr.c
+SRCS		=	src/nm.c		\
+			src/set_map_ptr.c
 
 OBJ_MAIN	=	$(MAIN:.c=.o)
 

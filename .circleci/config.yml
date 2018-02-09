@@ -30,7 +30,7 @@ jobs:
       #     command: ./objdump/unit_tests.out
       - run:
           name: Run Program
-          command: ./nm
+          command: ./my_nm my_nm
 
 workflows:
   version: 2
