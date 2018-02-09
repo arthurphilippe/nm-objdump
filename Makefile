@@ -31,12 +31,12 @@ tests_run: tests
 	@./$(TEST)
 
 $(NM):
-	@$(MAKE) -C nm/
-	ln -f nm/nm $(NM)
+	@$(MAKE) nm -C nm/
+	@ln -sf nm/nm $(NM)
 
 $(OBJDUMP):
-	@$(MAKE) -C objdump/
-	ln -f objdump/objdump $(OBJDUMP)
+	@$(MAKE) objdump -C objdump/
+	@ln -sf objdump/objdump $(OBJDUMP)
 
 clean:
 	@$(MAKE) clean -C nm/
@@ -49,4 +49,4 @@ fclean:
 
 re: fclean all
 
-.PHONY: all clean fclean re debug tests
+.PHONY: all clean fclean re debug tests $(NM) $(OBJDUMP)

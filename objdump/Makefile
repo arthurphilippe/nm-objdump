@@ -1,6 +1,6 @@
 ##
 ## EPITECH PROJECT, 2018
-## nanotekspice
+## objdump
 ## File description:
 ## Makefile
 ##

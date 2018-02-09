@@ -8,7 +8,6 @@
 #ifndef NM_H_
 	#define NM_H_
 
-const int EXIT_FAILURE = 1;
-const int EXIT_SUCCESS = 0;
+int nm(const char *file_name);
 
 #endif /* !NM_H_ */

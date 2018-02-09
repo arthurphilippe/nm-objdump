@@ -1,6 +1,6 @@
 ##
 ## EPITECH PROJECT, 2018
-## nanotekspice
+## nm
 ## File description:
 ## Makefile
 ##
@@ -13,7 +13,8 @@ NAME		=	nm
 
 MAIN		=	src/main.c
 
-SRCS		=
+SRCS		=	src/nm.c	\
+			src/get_map_ptr.c
 
 OBJ_MAIN	=	$(MAIN:.c=.o)
 
