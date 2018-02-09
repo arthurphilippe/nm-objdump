@@ -49,8 +49,10 @@ $(TEST): $(OBJS_TEST)
 	@$(CXX) $(OBJS_TEST) -o $(TEST) -lcriterion
 	@echo " --> $(TEST) built!"
 clean:
+	@$(RM) $(OBJS) $(OBJS_TEST)
 
 fclean: clean
+	@$(RM) $(NAME) $(TEST)
 
 re: fclean all
 
