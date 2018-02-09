@@ -1,0 +1,39 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: arthurphilippe/criterion
+    steps:
+      - checkout
+      - run:
+          name: Build Project
+          command: make
+      - run:
+          name: Build Unit Tests Suites
+          command: make tests
+      - save_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~
+
+  test:
+    docker:
+      - image: arthurphilippe/criterion
+    steps:
+      - restore_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          name: Unit Tests Execution
+          command: ./unit_tests.out
+      - run:
+          name: Run Program
+          command: ./nm
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
