@@ -26,10 +26,11 @@ typedef struct		s_elf_symbol {
 
 int nm(const char *file_name);
 int set_map_ptr(void **map, const char *file_name);
-int set_elf_fields(elf_t *elf, void *maped_file);
+int elf_set_fields(elf_t *elf, void *maped_file);
 int elf_validate_format(elf_t *elf);
 
 extern const int RETURN_ERROR;
+extern const int RETURN_OK;
 extern const int EXIT_FAILURE;
 extern const int EXIT_SUCCESS;
 

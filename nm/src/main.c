@@ -7,9 +7,6 @@
 
 #include "nm.h"
 
-const int EXIT_FAILURE = 1;
-const int EXIT_SUCCESS = 0;
-const int RETURN_ERROR = -1;
 const char *DEFAULT_FILE_NAME = "a.out";
 
 int nm_launcher(int ac, char **av)

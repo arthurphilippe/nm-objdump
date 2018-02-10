@@ -22,7 +22,8 @@ all: $(NM) $(OBJDUMP)
 
 debug: CPPFLAGS += -ggdb
 debug: fclean
-debug: $(NAME)
+	@$(MAKE) debug -C nm/
+	@ln -sf nm/nm $(NM)
 
 tests: CC=gcc
 tests: $(TEST)
