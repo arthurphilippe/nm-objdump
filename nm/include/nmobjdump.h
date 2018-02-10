@@ -1,12 +1,12 @@
 /*
 ** EPITECH PROJECT, 2018
-** objdump
+** nm
 ** File description:
-** header
+** main header
 */
 
-#ifndef OBJDUMP_H_
-	#define OBJDUMP_H_
+#ifndef NMOBJDUMP_H_
+	#define NMOBJDUMP_H_
 
 	#include <elf.h>
 
@@ -24,10 +24,14 @@ typedef struct		s_elf_symbol {
 	char		type;
 }			elf_symbol_t;
 
+int nm(const char *file_name);
+int set_map_ptr(void **map, const char *file_name);
+int elf_set_fields(elf_t *elf, void *maped_file);
+int elf_validate_format(elf_t *elf);
+
 extern const int RETURN_ERROR;
 extern const int RETURN_OK;
 extern const int EXIT_FAILURE;
 extern const int EXIT_SUCCESS;
 
-
-#endif /* !OBJDUMP_H_ */
+#endif /* !NMOBJDUMP_H_ */

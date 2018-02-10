@@ -5,7 +5,7 @@
 ** validate format
 */
 
-#include "nm.h"
+#include "nmobjdump.h"
 
 int elf_validate_format(elf_t *elf)
 {

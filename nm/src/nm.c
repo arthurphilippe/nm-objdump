@@ -6,7 +6,7 @@
 */
 
 #include <stdio.h>
-#include "nm.h"
+#include "nmobjdump.h"
 
 const int EXIT_FAILURE = 1;
 const int EXIT_SUCCESS = 0;

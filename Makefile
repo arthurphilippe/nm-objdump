@@ -20,10 +20,12 @@ endif
 
 all: $(NM) $(OBJDUMP)
 
-debug: CPPFLAGS += -ggdb
 debug: fclean
 	@$(MAKE) debug -C nm/
 	@ln -sf nm/nm $(NM)
+	@$(MAKE) debug -C objdump/
+	@ln -sf objdump/objdump $(OBJDUMP)
+
 
 tests: CC=gcc
 tests: $(TEST)

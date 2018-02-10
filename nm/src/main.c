@@ -5,7 +5,7 @@
 ** main
 */
 
-#include "nm.h"
+#include "nmobjdump.h"
 
 const char *DEFAULT_FILE_NAME = "a.out";
 

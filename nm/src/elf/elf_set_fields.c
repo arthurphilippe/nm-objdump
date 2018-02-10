@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
-#include "nm.h"
+#include "nmobjdump.h"
 
 /*
 ** Comes after the setting the sh table.
