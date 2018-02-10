@@ -5,8 +5,8 @@
 ** nm
 */
 
-#include "nm.h"
 #include <stdio.h>
+#include "nm.h"
 
 int nm(const char *file_name)
 {
