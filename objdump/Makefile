@@ -13,7 +13,11 @@ NAME		=	objdump
 
 MAIN		=	src/main.c
 
-SRCS		=
+SRCS		=	src/objdump.c			\
+			src/set_map_ptr.c		\
+			src/elf/elf_set_fields.c	\
+			src/elf/elf_validate_format.c
+
 
 OBJ_MAIN	=	$(MAIN:.c=.o)
 
