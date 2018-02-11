@@ -29,8 +29,8 @@ jobs:
       #     name: Unit Tests Execution
       #     command: ./objdump/unit_tests.out
       - run:
-          name: Run Program
-          command: ./my_nm my_nm
+          name: Run Functionnal tests
+          command: ./tests/functionnal_tests.sh
 
 workflows:
   version: 2
