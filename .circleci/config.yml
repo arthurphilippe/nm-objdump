@@ -28,6 +28,7 @@ jobs:
       # - run:
       #     name: Unit Tests Execution
       #     command: ./objdump/unit_tests.out
+      # kappa
       - run:
           name: Run Functionnal tests
           command: ./tests/functionnal_tests.sh
