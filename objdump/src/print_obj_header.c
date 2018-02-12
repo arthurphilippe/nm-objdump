@@ -13,7 +13,8 @@ static int print_has_syms(elf_t *elf, int carry)
 	size_t i = 0;
 
 	while (i < elf->ehdr->e_shnum) {
-		if (elf->sh_table[i].sh_type == SHT_SYMTAB) {
+		if (elf->sh_table[i].sh_type == SHT_SYMTAB
+			|| elf->sh_table[i].sh_type == SHT_DYNSYM) {
 			printf(!carry ? "HAS_SYMS" : ", HAS_SYMS");
 			return (1);
 		}
@@ -27,7 +28,8 @@ static int print_d_paged(elf_t *elf, int carry)
 	size_t i = 0;
 
 	while (i < elf->ehdr->e_shnum) {
-		if (elf->sh_table[i].sh_type == SHT_SYMTAB) {
+		if (elf->sh_table[i].sh_type == SHT_HASH
+			|| elf->sh_table[i].sh_type == SHT_GNU_HASH) {
 			printf(!carry ? "D_PAGED" : ", D_PAGED");
 			return (1);
 		}
