@@ -29,7 +29,7 @@ int set_map_ptr(void **map, const char *file_name);
 int elf_validate_format(elf_t *elf);
 int elf_set_fields(elf_t *elf, void *maped_file);
 void print_obj_header(elf_t *elf, const char *file_name);
-
+const char *get_target_arch(int machine);
 
 extern const int RETURN_ERROR;
 extern const int RETURN_OK;
