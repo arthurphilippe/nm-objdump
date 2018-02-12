@@ -35,16 +35,9 @@ static void fill_out_empty_space(size_t printed)
 	size_t nb_block = (16 - printed) / 4;
 	size_t nb_char = (16 - printed) * 2;
 	char *spaces_str = "                                        ";
-	// char spaces_str[21];
 
 	fflush(stdout);
 	write(1, spaces_str, nb_char + nb_block);
-	// dprintf(2, "debug: for i=%ld, nb_char=%ld, nb_block=%ld\n", printed, nb_char,nb_char);
-	// for (size_t i = 0; i < nb_block + nb_char; i += 1) {
-	// 	spaces_str[i] = ' ';
-	// }
-	// spaces_str[nb_block + nb_char] = '\0';
-	// printf("%s", spaces_str);
 }
 
 static void dump_section_contents(Elf64_Shdr *shdr, char *section)
