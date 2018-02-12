@@ -91,6 +91,7 @@ int objdump(const char *file_name)
 		return (RETURN_ERROR);
 	if (elf_set_fields(&elf, map) != 0)
 		return (RETURN_ERROR);
+	print_obj_header(&elf, file_name);
 	dump_mapped_object(&elf);
 	return (0);
 }

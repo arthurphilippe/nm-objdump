@@ -16,8 +16,8 @@ MAIN		=	src/main.c
 SRCS		=	src/objdump.c			\
 			src/set_map_ptr.c		\
 			src/elf/elf_set_fields.c	\
-			src/elf/elf_validate_format.c
-
+			src/elf/elf_validate_format.c	\
+			src/print_obj_header.c
 
 OBJ_MAIN	=	$(MAIN:.c=.o)
 

@@ -17,7 +17,6 @@ ifndef VERBOSE
 	MAKEFLAGS	+=	--no-print-directory
 endif
 
-
 all: $(NM) $(OBJDUMP)
 
 debug: fclean

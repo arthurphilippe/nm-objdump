@@ -43,8 +43,9 @@ static int elf_populate_strtab(elf_t *elf)
 		}
 		i += 1;
 	}
-	dprintf(STDERR_FILENO, "Failed to find string table\n");
-	return (RETURN_ERROR);
+	elf->string_table = NULL;
+	// dprintf(STDERR_FILENO, "Failed to find string table\n");
+	return (RETURN_OK);
 }
 
 /*
