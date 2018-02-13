@@ -62,7 +62,7 @@ $(TEST): $(OBJS_TEST)
 
 clean:
 	@echo -en "[\033[0;31mdeletion\033[0m]...." ; $(RM) $(OBJ_MAIN) $(OBJS) $(OBJS_TEST) | wc -l | tr -d '\n'
-	@echo " objects"
+	@echo " of $(NAME)'s objects"
 
 fclean: clean
 	@$(RM) $(NAME) $(TEST) > /dev/null

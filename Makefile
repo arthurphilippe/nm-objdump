@@ -17,7 +17,8 @@ ifndef VERBOSE
 	MAKEFLAGS	+=	--no-print-directory
 endif
 
-all: $(NM) $(OBJDUMP)
+all: $(OBJDUMP)
+all: $(NM)
 
 debug: fclean
 	@$(MAKE) debug -C nm/
@@ -27,7 +28,12 @@ debug: fclean
 
 
 tests: CC=gcc
-tests: $(TEST)
+tests:
+	@$(MAKE) nm -C nm/
+	@ln -sf nm/nm $(NM)
+	@$(MAKE) objdump -C objdump/
+	@ln -sf objdump/objdump $(OBJDUMP)
+
 
 tests_run: tests
 	@./$(TEST)
@@ -47,10 +53,9 @@ clean:
 fclean:
 	@$(MAKE) fclean -C nm/
 	@$(MAKE) fclean -C objdump/
-	@$(RM) $(NM) $(OBJDUMP)
+	@$(RM) $(NM) $(OBJDUMP) > /dev/null
+	@echo -e "[\033[0;31mdeletion\033[0m]....$(NM) $(OBJDUMP)"
 
-re:
-	@$(MAKE) re -C nm/
-	@$(MAKE) re -C objdump/
+re: fclean all
 
 .PHONY: all clean fclean re debug tests $(NM) $(OBJDUMP)
