@@ -36,7 +36,7 @@ CFLAGS		=	-W -Wextra -Wall -Iinclude/
 
 %.o: %.c
 	@printf "[\033[0;32massembly\033[0m]....%s\n" $<
-	@$(CC) -c -o $@ $< $(CFLAGS) $(LDFLAGS)
+	@$(CC) -c -o $@ $< $(CFLAGS)
 
 all: $(NAME)
 
