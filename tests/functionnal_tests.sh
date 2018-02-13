@@ -46,3 +46,23 @@ objdump -s -f Makfile &>/dev/null
 EXP_RET=$?
 
 ret_test $EXP_RET $MY_RET
+
+echo -ne ":: objdump\tRunning 64bit executable test... "
+
+./my_objdump my_objdump &>tests/test1.log
+MY_RET=$?
+objdump -s -f my_objdump &>tests/test1comp.log
+EXP_RET=$?
+
+diff_test tests/test1.log tests/test1comp.log $MY_RET $EXP_RET
+rm tests/test1.log tests/test1comp.log
+
+echo -ne ":: objdump\tRunning main.o test... "
+
+./my_objdump objdump/src/main.o &>tests/test2.log
+MY_RET=$?
+objdump -s -f objdump/src/main.o &>tests/test2comp.log
+EXP_RET=$?
+
+diff_test tests/test2.log tests/test2comp.log $MY_RET $EXP_RET
+# rm tests/test2.log tests/test2comp.log

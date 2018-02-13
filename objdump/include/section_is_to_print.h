@@ -16,6 +16,9 @@ inline static int section_is_to_print(elf_t *elf, size_t i)
 {
 	return (elf->sh_table[i].sh_type != SHT_SYMTAB
 		&& elf->sh_table[i].sh_type != SHT_NOBITS
+		&& (elf->ehdr->e_type != ET_REL
+			|| elf->sh_table[i].sh_type != SHT_RELA)
+		&& elf->sh_table[i].sh_size
 		&& elf->sh_string_table[elf->sh_table[i].sh_name]
 		&& strcmp(&elf->sh_string_table[elf->sh_table[i].sh_name],
 				".strtab")
