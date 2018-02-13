@@ -42,7 +42,7 @@ debug: CFLAGS += -ggdb
 debug: fclean
 debug: $(NAME)
 
-tests: CXX=g++
+tests: CC=gcc
 tests: $(TEST)
 
 tests_run: tests
@@ -50,12 +50,12 @@ tests_run: tests
 
 $(NAME): $(OBJ_MAIN) $(OBJS)
 	@printf "[\033[0;36mlinkage\033[0m].....%s\n" $(NAME)
-	@$(CXX) $(OBJ_MAIN) $(OBJS) -o $(NAME)
+	@$(CC) $(OBJ_MAIN) $(OBJS) -o $(NAME)
 	@echo -e " --> Complete!"
 
 $(TEST): $(OBJS_TEST)
 	@printf "[\033[0;36mlinkage\033[0m].....%s\n" $(TEST)
-	@$(CXX) $(OBJS_TEST) -o $(TEST) -lcriterion
+	@$(CC) $(OBJS_TEST) -o $(TEST) -lcriterion
 	@echo -e " --> Complete!"
 
 clean:
