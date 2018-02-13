@@ -32,6 +32,10 @@ OBJS_TEST	=	$(SRCS_TEST:.c=.o)
 
 CFLAGS		=	-W -Wextra -Wall -Iinclude/
 
+%.o: %.c
+	@printf "[\033[0;32massembly\033[0m]....%s\n" $<
+	@$(CC) -c -o $@ $< $(CFLAGS) $(LDFLAGS)
+
 all: $(NAME)
 
 debug: CFLAGS += -ggdb
@@ -45,18 +49,22 @@ tests_run: tests
 	@./$(TEST)
 
 $(NAME): $(OBJ_MAIN) $(OBJS)
+	@printf "[\033[0;36mlinkage\033[0m].....%s\n" $(NAME)
 	@$(CXX) $(OBJ_MAIN) $(OBJS) -o $(NAME)
-	@echo " --> $(NAME) built!"
+	@echo -e " --> Complete!"
 
 $(TEST): $(OBJS_TEST)
+	@printf "[\033[0;36mlinkage\033[0m].....%s\n" $(TEST)
 	@$(CXX) $(OBJS_TEST) -o $(TEST) -lcriterion
-	@echo " --> $(TEST) built!"
+	@echo -e " --> Complete!"
 
 clean:
-	@$(RM) $(OBJ_MAIN) $(OBJS) $(OBJS_TEST)
+	@echo -en "[\033[0;31mdeletion\033[0m]...." ; $(RM) $(OBJ_MAIN) $(OBJS) $(OBJS_TEST) | wc -l | tr -d '\n'
+	@echo " objects"
 
 fclean: clean
-	@$(RM) $(NAME) $(TEST)
+	@$(RM) $(NAME) $(TEST) > /dev/null
+	@echo -e "[\033[0;31mdeletion\033[0m]....$(NAME)"
 
 re: fclean all
 

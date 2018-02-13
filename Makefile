@@ -49,6 +49,8 @@ fclean:
 	@$(MAKE) fclean -C objdump/
 	@$(RM) $(NM) $(OBJDUMP)
 
-re: fclean all
+re:
+	@$(MAKE) re -C nm/
+	@$(MAKE) re -C objdump/
 
 .PHONY: all clean fclean re debug tests $(NM) $(OBJDUMP)
