@@ -22,11 +22,11 @@ static char *prepare_str(const char *str)
 	if (!outp)
 		return (NULL);
 	i = 0;
-	while (outp[i]) {
-		if (islower(outp[i]))
-			outp[i] = outp[i] - 'a' + 'A';
-		i += 1;
-	}
+	// while (outp[i]) {
+	// 	if (islower(outp[i]))
+	// 		outp[i] = outp[i] - 'a' + 'A';
+	// 	i += 1;
+	// }
 	return (outp);
 }
 
