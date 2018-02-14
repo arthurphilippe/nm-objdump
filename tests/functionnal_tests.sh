@@ -47,7 +47,7 @@ EXP_RET=$?
 
 ret_test $EXP_RET $MY_RET
 
-echo -ne ":: objdump\tRunning 64bit executable test... "
+echo -ne ":: objdump\tRunning 64bits executable test... "
 
 ./my_objdump my_objdump &>tests/test1.log
 MY_RET=$?
@@ -66,3 +66,13 @@ EXP_RET=$?
 
 diff_test tests/test2.log tests/test2comp.log $MY_RET $EXP_RET
 rm tests/test2.log tests/test2comp.log
+
+echo -ne ":: objdump\tRunning 32bits .so test... "
+
+./my_objdump /usr/lib32/libcrypt.so &>tests/test3.log
+MY_RET=$?
+objdump -s -f /usr/lib32/libcrypt.so &>tests/test3comp.log
+EXP_RET=$?
+
+diff_test tests/test3.log tests/test3comp.log $MY_RET $EXP_RET
+# rm tests/test2.log tests/test2comp.log

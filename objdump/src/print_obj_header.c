@@ -40,6 +40,10 @@ void print_obj_header(elf_t *elf, const char *file_name)
 	if (elf->ehdr->e_ident[EI_CLASS] == 2)
 		printf(":x86-64");
 	print_obj_flags(elf);
-	printf("start address 0x%016x\n\n",
-		(unsigned int) elf->ehdr->e_entry);
+	if (elf->ehdr->e_ident[EI_CLASS] == ELFCLASS64)
+		printf("start address 0x%016x\n\n",
+			(unsigned int) elf->ehdr->e_entry);
+	else
+		printf("start address 0x%08x\n\n",
+			(unsigned int) elf->ehdr->e_entry);
 }

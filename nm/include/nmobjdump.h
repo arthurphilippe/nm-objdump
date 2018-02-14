@@ -28,6 +28,7 @@ int nm(const char *file_name);
 int set_map_ptr(void **map, const char *file_name);
 int elf_set_fields(elf_t *elf, void *maped_file);
 int elf_validate_format(elf_t *elf);
+int elf_populate_32bits(elf_t *elf);
 
 extern const int RETURN_ERROR;
 extern const int RETURN_OK;

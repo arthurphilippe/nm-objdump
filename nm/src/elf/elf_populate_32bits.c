@@ -63,6 +63,7 @@ int elf_populate_32bits(elf_t *elf)
 		return (RETURN_ERROR);
 	}
 	elf_cpy_header(src, dest);
+	elf->ehdr = dest;
 	elf->sh_table = elf_dup_sh_table(src);
 	return ((elf->sh_table) ? RETURN_OK : RETURN_ERROR);
 }
