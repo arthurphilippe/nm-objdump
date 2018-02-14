@@ -17,7 +17,10 @@ SRCS		=	src/nm.c			\
 			src/set_map_ptr.c		\
 			src/elf/elf_set_fields.c	\
 			src/elf/elf_validate_format.c	\
-			src/elf/elf_populate_32bits.c
+			src/elf/elf_populate_32bits.c	\
+			src/get_symbol_list.c		\
+			src/list_symbols_from_symtab.c	\
+			src/symbol_list.c
 
 OBJ_MAIN	=	$(MAIN:.c=.o)
 

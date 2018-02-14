@@ -20,6 +20,7 @@ static int elf_populate_shstrtab(elf_t *elf)
 
 	if (shstrndx == SHN_UNDEF) {
 		// dprintf(STDERR_FILENO, "Cannot get shstrndx\n");
+		elf->sh_string_table = NULL;
 		return (RETURN_OK);
 	}
 	elf->sh_string_table = ((char *) elf->addr) +
@@ -38,7 +39,7 @@ static int elf_populate_strtab(elf_t *elf)
 	while (i < elf->ehdr->e_shnum) {
 		if (strcmp(&elf->sh_string_table[elf->sh_table[i].sh_name],
 				".strtab") == 0) {
-			elf->string_table = (char *) elf->sh_table[i].sh_offset;
+			elf->string_table = (char *) elf->addr + elf->sh_table[i].sh_offset;
 			return (RETURN_OK);
 		}
 		i += 1;
