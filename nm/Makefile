@@ -20,7 +20,8 @@ SRCS		=	src/nm.c			\
 			src/elf/elf_populate_32bits.c	\
 			src/get_symbol_list.c		\
 			src/list_symbols_from_symtab.c	\
-			src/symbol_list.c
+			src/symbol_list.c		\
+			src/symbol_cmp_names.c
 
 OBJ_MAIN	=	$(MAIN:.c=.o)
 
