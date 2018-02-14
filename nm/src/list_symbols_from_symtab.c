@@ -20,7 +20,7 @@ void list_symbols_from_systab(elf_t *elf, Elf64_Shdr *sh_symtab,
 		if (symbol_is_printable(elf, &symtab[i])) {
 			curr = new_node(symtab[i].st_value,
 					&(elf->string_table[symtab[i].st_name]),
-					'?');
+					type_symbol(elf, &symtab[i]));
 			symbol_list_pushback(head, curr);
 		}
 		i += 1;

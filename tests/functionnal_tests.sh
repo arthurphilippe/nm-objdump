@@ -38,6 +38,17 @@ EXP_RET=$?
 
 ret_test $EXP_RET $MY_RET
 
+echo -ne ":: nm\t\tRunning 64bits executable test... "
+
+./my_nm my_nm &>tests/test1.log
+MY_RET=$?
+nm my_nm &>tests/test1comp.log
+EXP_RET=$?
+
+diff_test tests/test1.log tests/test1comp.log $MY_RET $EXP_RET
+rm tests/test1.log tests/test1comp.log
+
+
 echo -ne ":: objdump\tRunning invalid file test... "
 
 ./my_objdump Makefile &>/dev/null

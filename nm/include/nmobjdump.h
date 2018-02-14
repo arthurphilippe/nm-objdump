@@ -39,6 +39,7 @@ elf_symbol_t *get_symbol_list(elf_t *elf);
 int compare_and_swap_nodes(elf_symbol_t *node);
 void print_list(elf_symbol_t *list);
 int symbol_cmp_names(const char *s1, const char *s2);
+char type_symbol(elf_t *elf, Elf64_Sym *sym);
 
 extern const int RETURN_ERROR;
 extern const int RETURN_OK;

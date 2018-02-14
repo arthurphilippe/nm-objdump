@@ -21,7 +21,8 @@ SRCS		=	src/nm.c			\
 			src/get_symbol_list.c		\
 			src/list_symbols_from_symtab.c	\
 			src/symbol_list.c		\
-			src/symbol_cmp_names.c
+			src/symbol_cmp_names.c		\
+			src/type_symbol.c
 
 OBJ_MAIN	=	$(MAIN:.c=.o)
 
