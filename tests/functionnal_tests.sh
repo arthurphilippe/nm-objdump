@@ -57,11 +57,11 @@ EXP_RET=$?
 diff_test tests/test1.log tests/test1comp.log $MY_RET $EXP_RET
 rm tests/test1.log tests/test1comp.log
 
-echo -ne ":: objdump\tRunning main.o test... "
+echo -ne ":: objdump\tRunning objdump/src/objdump.o test... "
 
-./my_objdump objdump/src/main.o &>tests/test2.log
+./my_objdump objdump/src/objdump.o &>tests/test2.log
 MY_RET=$?
-objdump -s -f objdump/src/main.o &>tests/test2comp.log
+objdump -s -f objdump/src/objdump.o &>tests/test2comp.log
 EXP_RET=$?
 
 diff_test tests/test2.log tests/test2comp.log $MY_RET $EXP_RET
