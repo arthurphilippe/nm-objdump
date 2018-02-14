@@ -65,4 +65,4 @@ objdump -s -f objdump/src/main.o &>tests/test2comp.log
 EXP_RET=$?
 
 diff_test tests/test2.log tests/test2comp.log $MY_RET $EXP_RET
-# rm tests/test2.log tests/test2comp.log
+rm tests/test2.log tests/test2comp.log

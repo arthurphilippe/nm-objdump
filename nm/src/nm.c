@@ -8,8 +8,8 @@
 #include <stdio.h>
 #include "nmobjdump.h"
 
-const int EXIT_FAILURE = 1;
-const int EXIT_SUCCESS = 0;
+const int FAILURE = 1;
+const int SUCCESS = 0;
 const int RETURN_ERROR = -1;
 const int RETURN_OK = 0;
 

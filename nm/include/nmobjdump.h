@@ -31,7 +31,7 @@ int elf_validate_format(elf_t *elf);
 
 extern const int RETURN_ERROR;
 extern const int RETURN_OK;
-extern const int EXIT_FAILURE;
-extern const int EXIT_SUCCESS;
+extern const int FAILURE;
+extern const int SUCCESS;
 
 #endif /* !NMOBJDUMP_H_ */

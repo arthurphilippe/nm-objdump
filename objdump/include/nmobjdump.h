@@ -30,10 +30,11 @@ int elf_validate_format(elf_t *elf);
 int elf_set_fields(elf_t *elf, void *maped_file);
 void print_obj_header(elf_t *elf, const char *file_name);
 const char *get_target_arch(int machine);
+int elf_populate_32bits(elf_t *elf);
 
 extern const int RETURN_ERROR;
 extern const int RETURN_OK;
-extern const int EXIT_FAILURE;
-extern const int EXIT_SUCCESS;
+extern const int FAILURE;
+extern const int SUCCESS;
 
 #endif /* !OBJDUMP_H_ */
