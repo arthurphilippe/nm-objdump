@@ -15,13 +15,13 @@ static char *prepare_str(const char *str)
 	char *outp;
 	int i = 0;
 
-	while (str[i] == '_') {
-		i += 1;
-	}
+	// while (str[i] == '_') {
+	// 	i += 1;
+	// }
 	outp = strdup(&str[i]);
 	if (!outp)
 		return (NULL);
-	i = 0;
+	// i = 0;
 	// while (outp[i]) {
 	// 	if (islower(outp[i]))
 	// 		outp[i] = outp[i] - 'a' + 'A';
