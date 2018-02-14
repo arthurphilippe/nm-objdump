@@ -76,3 +76,5 @@ EXP_RET=$?
 
 diff_test tests/test3.log tests/test3comp.log $MY_RET $EXP_RET
 # rm tests/test2.log tests/test2comp.log
+
+# exit $RET
