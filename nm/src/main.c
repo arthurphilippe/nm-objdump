@@ -5,6 +5,7 @@
 ** main
 */
 
+#include <stdio.h>
 #include "nmobjdump.h"
 
 const char *DEFAULT_FILE_NAME = "a.out";
@@ -15,6 +16,8 @@ int nm_launcher(int ac, char **av)
 	int ret = SUCCESS;
 
 	while (i < ac) {
+		if (ac != 2)
+			printf("\n%s:\n", av[i]);
 		ret = nm(av[i]);
 		i += 1;
 	}
