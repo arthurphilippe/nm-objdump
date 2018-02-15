@@ -88,14 +88,14 @@ EXP_RET=$?
 diff_test tests/test.log tests/testcomp.log $MY_RET $EXP_RET
 rm tests/test.log tests/testcomp.log
 
-echo -ne ":: objdump\tRunning 32bits .so test... "
+# echo -ne ":: objdump\tRunning 32bits .so test... "
 
-./my_objdump /usr/lib32/libcrypt.so &>tests/test.log
-MY_RET=$?
-objdump -s -f /usr/lib32/libcrypt.so &>tests/testcomp.log
-EXP_RET=$?
+# ./my_objdump /usr/lib32/libcrypt.so &>tests/test.log
+# MY_RET=$?
+# objdump -s -f /usr/lib32/libcrypt.so &>tests/testcomp.log
+# EXP_RET=$?
 
-diff_test tests/test.log tests/testcomp.log $MY_RET $EXP_RET
-rm tests/test.log tests/testcomp.log
+# diff_test tests/test.log tests/testcomp.log $MY_RET $EXP_RET
+# rm tests/test.log tests/testcomp.log
 
-# exit $RET
+exit $RET
