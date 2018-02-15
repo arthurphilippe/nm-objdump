@@ -36,8 +36,9 @@ OBJS_TEST	=	$(SRCS_TEST:.c=.o)
 CFLAGS		=	-W -Wextra -Wall -Iinclude/
 
 %.o: %.c
-	@printf "[\033[0;32massembly\033[0m]....%s\n" $<
+	@printf "[\033[0;36mcompiling\033[0m]...%s\r" $<
 	@$(CC) -c -o $@ $< $(CFLAGS)
+	@printf "[\033[0;32mcompiled\033[0m]....%s\n" $<
 
 all: $(NAME)
 
@@ -52,14 +53,14 @@ tests_run: tests
 	@./$(TEST)
 
 $(NAME): $(OBJ_MAIN) $(OBJS)
-	@printf "[\033[0;36mlinkage\033[0m].....%s\n" $(NAME)
+	@printf "[\033[0;36mlinking\033[0m].....%s\r" $(NAME)
 	@$(CC) $(OBJ_MAIN) $(OBJS) -o $(NAME)
-	@echo -e " --> Complete!"
+	@printf "[\033[0;36mlinked\033[0m]......%s\n" $(NAME)
 
 $(TEST): $(OBJS_TEST)
-	@printf "[\033[0;36mlinkage\033[0m].....%s\n" $(TEST)
+	@printf "[\033[0;36mlinking\033[0m].....%s\r" $(TEST)
 	@$(CC) $(OBJS_TEST) -o $(TEST) -lcriterion
-	@echo -e " --> Complete!"
+	@printf "[\033[0;36mlinked\033[0m]......%s\n" $(TEST)
 
 clean:
 	@echo -en "[\033[0;31mdeletion\033[0m]...." ; $(RM) $(OBJ_MAIN) $(OBJS) $(OBJS_TEST) | wc -l | tr -d '\n'
