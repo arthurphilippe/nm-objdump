@@ -52,7 +52,7 @@ echo -ne ":: nm\t\tRunning 2 64bits executable test... "
 
 ./my_nm my_nm my_objdump &>tests/test.log
 MY_RET=$?
-nm my_objdump &>tests/testcomp.log
+nm my_nm my_objdump &>tests/testcomp.log
 EXP_RET=$?
 
 diff_test tests/test.log tests/testcomp.log $MY_RET $EXP_RET
