@@ -40,13 +40,23 @@ ret_test $EXP_RET $MY_RET
 
 echo -ne ":: nm\t\tRunning 64bits executable test... "
 
-./my_nm my_nm &>tests/test1.log
+./my_nm my_nm &>tests/test.log
 MY_RET=$?
-nm my_nm &>tests/test1comp.log
+nm my_nm &>tests/testcomp.log
 EXP_RET=$?
 
-diff_test tests/test1.log tests/test1comp.log $MY_RET $EXP_RET
-rm tests/test1.log tests/test1comp.log
+diff_test tests/test.log tests/testcomp.log $MY_RET $EXP_RET
+rm tests/test.log tests/testcomp.log
+
+echo -ne ":: nm\t\tRunning 2 64bits executable test... "
+
+./my_nm my_nm my_objdump &>tests/test.log
+MY_RET=$?
+nm my_objdump &>tests/testcomp.log
+EXP_RET=$?
+
+diff_test tests/test.log tests/testcomp.log $MY_RET $EXP_RET
+rm tests/test.log tests/testcomp.log
 
 
 echo -ne ":: objdump\tRunning invalid file test... "
@@ -60,32 +70,32 @@ ret_test $EXP_RET $MY_RET
 
 echo -ne ":: objdump\tRunning 64bits executable test... "
 
-./my_objdump my_objdump &>tests/test1.log
+./my_objdump my_objdump &>tests/test.log
 MY_RET=$?
-objdump -s -f my_objdump &>tests/test1comp.log
+objdump -s -f my_objdump &>tests/testcomp.log
 EXP_RET=$?
 
-diff_test tests/test1.log tests/test1comp.log $MY_RET $EXP_RET
-rm tests/test1.log tests/test1comp.log
+diff_test tests/test.log tests/testcomp.log $MY_RET $EXP_RET
+rm tests/test.log tests/testcomp.log
 
 echo -ne ":: objdump\tRunning objdump/src/objdump.o test... "
 
-./my_objdump objdump/src/objdump.o &>tests/test2.log
+./my_objdump objdump/src/objdump.o &>tests/test.log
 MY_RET=$?
-objdump -s -f objdump/src/objdump.o &>tests/test2comp.log
+objdump -s -f objdump/src/objdump.o &>tests/testcomp.log
 EXP_RET=$?
 
-diff_test tests/test2.log tests/test2comp.log $MY_RET $EXP_RET
-rm tests/test2.log tests/test2comp.log
+diff_test tests/test.log tests/testcomp.log $MY_RET $EXP_RET
+rm tests/test.log tests/testcomp.log
 
 echo -ne ":: objdump\tRunning 32bits .so test... "
 
-./my_objdump /usr/lib32/libcrypt.so &>tests/test3.log
+./my_objdump /usr/lib32/libcrypt.so &>tests/test.log
 MY_RET=$?
-objdump -s -f /usr/lib32/libcrypt.so &>tests/test3comp.log
+objdump -s -f /usr/lib32/libcrypt.so &>tests/testcomp.log
 EXP_RET=$?
 
-diff_test tests/test3.log tests/test3comp.log $MY_RET $EXP_RET
-# rm tests/test2.log tests/test2comp.log
+diff_test tests/test.log tests/testcomp.log $MY_RET $EXP_RET
+rm tests/test.log tests/testcomp.log
 
 # exit $RET

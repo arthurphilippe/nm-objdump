@@ -56,6 +56,7 @@ elf_symbol_t *new_node(Elf64_Addr contents, char *name, char type)
 	new->contents = contents;
 	new->name = name;
 	new->type = type;
+	new->next = NULL;
 	return (new);
 }
 
