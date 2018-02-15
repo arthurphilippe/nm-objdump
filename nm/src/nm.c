@@ -21,7 +21,7 @@ void display(elf_t *elf)
 	elf_symbol_t *list = get_symbol_list(elf);
 
 	if (list) {
-		print_list(list);
+		print_list(list, (elf->ehdr->e_ident[EI_CLASS] == ELFCLASS32));
 		symbol_list_destroy(list);
 	}
 }

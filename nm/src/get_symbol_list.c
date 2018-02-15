@@ -5,8 +5,26 @@
 ** symbols
 */
 
+#include <stdlib.h>
 #include <stddef.h>
 #include "nmobjdump.h"
+
+static Elf64_Sym *get_fitted_symtab(Elf32_Sym *src, size_t count)
+{
+	size_t i = 0;
+	Elf64_Sym *dest = malloc(sizeof(*dest) * count);
+
+	while (i < count) {
+		dest[i].st_name = src[i].st_name;
+		dest[i].st_value = src[i].st_value;
+		dest[i].st_size = src[i].st_size;
+		dest[i].st_info = src[i].st_info;
+		dest[i].st_other = src[i].st_other;
+		dest[i].st_shndx = src[i].st_shndx;
+		i += 1;
+	}
+	return (dest);
+}
 
 static void get_next_symtab(elf_t *elf, Elf64_Shdr **sh_symtab,
 				Elf64_Sym **symtab, size_t *idx)
@@ -47,7 +65,14 @@ elf_symbol_t *get_symbol_list(elf_t *elf)
 
 	get_next_symtab(elf, &sh_symtab, &symtab, &idx_symtab);
 	while (symtab) {
-		list_symbols_from_systab(elf, sh_symtab, symtab, &list);
+		if (elf->ehdr->e_ident[EI_CLASS] == ELFCLASS32) {
+			symtab = get_fitted_symtab((void *) symtab,
+				sh_symtab->sh_size / sh_symtab->sh_entsize);
+			list_symbols_from_systab(elf, sh_symtab, symtab, &list);
+			free(symtab);
+		}
+		else
+			list_symbols_from_systab(elf, sh_symtab, symtab, &list);
 		get_next_symtab(elf, &sh_symtab, &symtab, &idx_symtab);
 	}
 	sort_symbol_list(&list);

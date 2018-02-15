@@ -10,12 +10,16 @@
 #include <string.h>
 #include "nmobjdump.h"
 
-void print_list(elf_symbol_t *list)
+void print_list(elf_symbol_t *list, int is_32bits)
 {
 	while (list) {
-		if (list->contents)
+		if (list->contents && !is_32bits)
 			printf("%016lx %c %s\n", list->contents, list->type,
 				list->name);
+		else if (list->contents) {
+			printf("%08lx %c %s\n", list->contents, list->type,
+				list->name);
+		}
 		else
 			printf("                 %c %s\n", list->type,
 				list->name);
