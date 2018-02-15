@@ -95,7 +95,7 @@ int objdump(const char *file_name)
 		return (RETURN_ERROR);
 	print_obj_header(&elf, file_name);
 	dump_mapped_object(&elf);
-		if (elf.ehdr->e_ident[EI_CLASS] == ELFCLASS32) {
+	if (elf.ehdr->e_ident[EI_CLASS] == ELFCLASS32) {
 		free(elf.ehdr);
 		free(elf.sh_table);
 	}
