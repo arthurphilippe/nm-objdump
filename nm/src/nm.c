@@ -7,12 +7,24 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <sys/mman.h>
 #include "nmobjdump.h"
 
 const int FAILURE = 1;
 const int SUCCESS = 0;
 const int RETURN_ERROR = -1;
 const int RETURN_OK = 0;
+
+void display(elf_t *elf)
+{
+	elf_symbol_t *list = get_symbol_list(elf);
+
+	if (list) {
+		print_list(list);
+		symbol_list_destroy(list);
+	}
+}
 
 int nm(const char *file_name)
 {
@@ -28,6 +40,11 @@ int nm(const char *file_name)
 		return (RETURN_ERROR);
 	if (!elf.string_table || !elf.sh_string_table)
 		return (RETURN_OK);
-	print_list(get_symbol_list(&elf));
+	display(&elf);
+	if (elf.ehdr->e_ident[EI_CLASS] == ELFCLASS32) {
+		free(elf.ehdr);
+		free(elf.sh_table);
+	}
+	munmap(elf.addr, size);
 	return (0);
 }

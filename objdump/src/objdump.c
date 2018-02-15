@@ -10,6 +10,8 @@
 #include <stddef.h>
 #include <unistd.h>
 #include "nmobjdump.h"
+#include <stdlib.h>
+#include <sys/mman.h>
 #include "section_is_to_print.h"
 #include "print_byte.h"
 
@@ -93,5 +95,10 @@ int objdump(const char *file_name)
 		return (RETURN_ERROR);
 	print_obj_header(&elf, file_name);
 	dump_mapped_object(&elf);
+		if (elf.ehdr->e_ident[EI_CLASS] == ELFCLASS32) {
+		free(elf.ehdr);
+		free(elf.sh_table);
+	}
+	munmap(elf.addr, size);
 	return (0);
 }
