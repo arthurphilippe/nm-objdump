@@ -22,7 +22,9 @@ SRCS		=	src/nm.c			\
 			src/list_symbols_from_symtab.c	\
 			src/symbol_list.c		\
 			src/symbol_cmp_names.c		\
-			src/type_symbol.c
+			src/type_symbol.c		\
+			src/typing/type_functors1.c	\
+			src/typing/type_functors2.c	\
 
 OBJ_MAIN	=	$(MAIN:.c=.o)
 
@@ -63,7 +65,7 @@ $(NAME): $(OBJ_MAIN) $(OBJS)
 $(TEST): $(OBJS_TEST)
 	@printf "[\033[0;36mlinking\033[0m]% 41s\r" $(TEST) | tr " " "."
 	@$(CC) $(OBJS_TEST) -o $(TEST) -lcriterion
-	@printf "[\033[0;36mlinked\033[0m]% 42\n" $(TEST) | tr " " "."
+	@printf "[\033[0;36mlinked\033[0m]% 42s\n" $(TEST) | tr " " "."
 
 clean:
 	@printf "[\033[0;31mdeletion\033[0m][objects]% 31s\n" `$(RM) $(OBJ_MAIN) $(OBJS) $(OBJS_TEST) | wc -l | tr -d '\n'` | tr " " "."

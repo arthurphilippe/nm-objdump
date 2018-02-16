@@ -7,18 +7,20 @@
 
 #include "nmobjdump.h"
 #include "symbol_is_from_section.h"
+#include "type_functors.h"
 
-char type_functor_wv(Elf64_Sym *sym)
-{
-	if (ELF64_ST_BIND(sym->st_info) == STB_WEAK) {
-		if (!sym->st_value)
-			return (ELF64_ST_TYPE(sym->st_info)
-				== STT_OBJECT ? 'v' : 'w');
-		return (ELF64_ST_TYPE(sym->st_info)
-			== STT_OBJECT ? 'V' : 'W');
-	}
-	return (0);
-}
+char (*const TYPE_FUNCTORS[]) (elf_t *elf, Elf64_Sym *sym) = {
+	type_functor_absolute,
+	type_functor_weak,
+	type_functor_common,
+	type_functor_undef,
+	type_functor_debug,
+	type_functor_uninit,
+	type_functor_text,
+	type_functor_rom,
+	type_functor_init,
+	NULL,
+};
 
 char type_functor_cun(elf_t *elf, Elf64_Sym *sym)
 {
@@ -48,30 +50,16 @@ char type_functor_btr(elf_t *elf, Elf64_Sym *sym)
 	return (0);
 }
 
-char type_functor_d(elf_t *elf, Elf64_Sym *sym)
-{
-	if (ELF64_ST_TYPE(sym->st_info) == STT_OBJECT
-		|| ELF64_ST_TYPE(sym->st_info) == STT_NOTYPE
-		|| symbol_is_from_section(sym, elf, ".data")
-		|| symbol_is_from_section(sym, elf, ".data1"))
-		return ('d');
-	return (0);
-}
-
-
 char type_symbol(elf_t *elf, Elf64_Sym *sym)
 {
 	char ret;
+	size_t i = 0;
 
-	if (sym->st_shndx == SHN_ABS)
-		return (ELF64_ST_BIND(sym->st_info)
-			== STB_LOCAL ? 'a' : 'a' - 32);
-	else if ((ret = type_functor_wv(sym))
-			|| (ret = type_functor_cun(elf, sym)))
-		return (ret);
-	else if ((ret = type_functor_btr(elf, sym))
-			|| (ret = type_functor_d(elf, sym)))
-		return (ELF64_ST_BIND(sym->st_info)
-			== STB_LOCAL ? ret : ret - 32);
+	while (TYPE_FUNCTORS[i]) {
+		ret = TYPE_FUNCTORS[i](elf, sym);
+		if (ret)
+			return (ret);
+		i += 1;
+	}
 	return ('?');
 }

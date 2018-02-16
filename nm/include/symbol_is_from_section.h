@@ -18,11 +18,4 @@ inline static int symbol_is_from_section(Elf64_Sym *sym, elf_t *elf,
 			[elf->sh_table[sym->st_shndx].sh_name], s));
 }
 
-inline static int symbol_is_from_section_type(Elf64_Sym *sym, elf_t *elf,
-						Elf64_Word type)
-{
-	return (elf->sh_table[sym->st_shndx].sh_type == type);
-}
-
-
 #endif /* !SYMBOL_IS_FROM_SECTION_H_ */
