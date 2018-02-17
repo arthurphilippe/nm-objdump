@@ -32,14 +32,12 @@ void display(elf_t *elf, const char *file_name)
 int nm(const char *file_name, int display_file_name)
 {
 	void *map;
-	int size;
+	int size = set_map_ptr(&map, file_name);
 	elf_t elf;
 
-	memset(&elf, 0, sizeof(elf_t));
-	size = set_map_ptr(&map, file_name);
 	if (size == RETURN_ERROR)
 		return (RETURN_ERROR);
-	if (elf_set_fields(&elf, map) != 0)
+	if (elf_set_fields(&elf, map) != RETURN_OK)
 		return (RETURN_ERROR);
 	if (!elf.string_table || !elf.sh_string_table) {
 		dprintf(STDERR_FILENO, "%s: no symbols\n", file_name);

@@ -56,6 +56,7 @@ int elf_set_fields(elf_t *elf, void *maped_file)
 {
 	int ret = 0;
 
+	memset(elf, 0, sizeof(elf_t));
 	elf->addr = maped_file;
 	elf->ehdr = maped_file;
 	if (!elf_validate_format(elf)) {
