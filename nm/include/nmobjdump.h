@@ -25,7 +25,7 @@ typedef struct			s_elf_symbol {
 	struct s_elf_symbol	*next;
 }				elf_symbol_t;
 
-int nm(const char *file_name);
+int nm(const char *file_name, int display);
 int set_map_ptr(void **map, const char *file_name);
 int elf_set_fields(elf_t *elf, void *maped_file);
 int elf_validate_format(elf_t *elf);

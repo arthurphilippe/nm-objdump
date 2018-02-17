@@ -16,17 +16,19 @@ const int SUCCESS = 0;
 const int RETURN_ERROR = -1;
 const int RETURN_OK = 0;
 
-void display(elf_t *elf)
+void display(elf_t *elf, const char *file_name)
 {
 	elf_symbol_t *list = get_symbol_list(elf);
 
 	if (list) {
+		if (file_name)
+			printf("\n%s:\n", file_name);
 		print_list(list, (elf->ehdr->e_ident[EI_CLASS] == ELFCLASS32));
 		symbol_list_destroy(list);
 	}
 }
 
-int nm(const char *file_name)
+int nm(const char *file_name, int display_file_name)
 {
 	void *map;
 	int size;
@@ -40,7 +42,7 @@ int nm(const char *file_name)
 		return (RETURN_ERROR);
 	if (!elf.string_table || !elf.sh_string_table)
 		return (RETURN_OK);
-	display(&elf);
+	display(&elf, (display_file_name) ? file_name : NULL);
 	if (elf.ehdr->e_ident[EI_CLASS] == ELFCLASS32) {
 		free(elf.ehdr);
 		free(elf.sh_table);
