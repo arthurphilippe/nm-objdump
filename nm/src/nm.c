@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <sys/mman.h>
 #include "nmobjdump.h"
 
@@ -40,8 +41,10 @@ int nm(const char *file_name, int display_file_name)
 		return (RETURN_ERROR);
 	if (elf_set_fields(&elf, map) != 0)
 		return (RETURN_ERROR);
-	if (!elf.string_table || !elf.sh_string_table)
+	if (!elf.string_table || !elf.sh_string_table) {
+		dprintf(STDERR_FILENO, "%s: no symbols\n", file_name);
 		return (RETURN_OK);
+	}
 	display(&elf, (display_file_name) ? file_name : NULL);
 	if (elf.ehdr->e_ident[EI_CLASS] == ELFCLASS32) {
 		free(elf.ehdr);
