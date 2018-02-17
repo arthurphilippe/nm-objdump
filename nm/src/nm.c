@@ -14,8 +14,8 @@
 
 const int FAILURE = 1;
 const int SUCCESS = 0;
-const int RETURN_ERROR = -1;
 const int RETURN_OK = 0;
+const int RETURN_ERROR = -1;
 
 void display(elf_t *elf, const char *file_name)
 {
@@ -29,20 +29,19 @@ void display(elf_t *elf, const char *file_name)
 	}
 }
 
-int nm(const char *file_name, int display_file_name)
+int nm(const char *file_name, int display_file_name, const char *bin_name)
 {
 	void *map;
 	int size = set_map_ptr(&map, file_name);
+	int err;
 	elf_t elf;
 
-	if (size == RETURN_ERROR)
-		return (RETURN_ERROR);
-	if (elf_set_fields(&elf, map) != RETURN_OK)
-		return (RETURN_ERROR);
-	if (!elf.string_table || !elf.sh_string_table) {
-		dprintf(STDERR_FILENO, "%s: no symbols\n", file_name);
-		return (RETURN_OK);
-	}
+	if (size < RETURN_OK)
+		return (nm_errors(size, bin_name, file_name));
+	if ((err = elf_set_fields(&elf, map)) != RETURN_OK)
+		return (nm_errors(err, bin_name, file_name));
+	if (!elf.string_table || !elf.sh_string_table)
+		return (nm_errors(RETURN_ERR_NO_SYMS, bin_name, file_name));
 	display(&elf, (display_file_name) ? file_name : NULL);
 	if (elf.ehdr->e_ident[EI_CLASS] == ELFCLASS32) {
 		free(elf.ehdr);

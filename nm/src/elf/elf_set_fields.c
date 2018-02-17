@@ -19,7 +19,6 @@ static int elf_populate_shstrtab(elf_t *elf)
 	Elf64_Half shstrndx = elf->ehdr->e_shstrndx;
 
 	if (shstrndx == SHN_UNDEF) {
-		// dprintf(STDERR_FILENO, "Cannot get shstrndx\n");
 		elf->sh_string_table = NULL;
 		return (RETURN_OK);
 	}
@@ -39,7 +38,8 @@ static int elf_populate_strtab(elf_t *elf)
 	while (i < elf->ehdr->e_shnum) {
 		if (strcmp(&elf->sh_string_table[elf->sh_table[i].sh_name],
 				".strtab") == 0) {
-			elf->string_table = (char *) elf->addr + elf->sh_table[i].sh_offset;
+			elf->string_table = (char *) elf->addr
+						+ elf->sh_table[i].sh_offset;
 			return (RETURN_OK);
 		}
 		i += 1;
@@ -47,7 +47,6 @@ static int elf_populate_strtab(elf_t *elf)
 	elf->string_table = NULL;
 	return (RETURN_OK);
 }
-// dprintf(STDERR_FILENO, "Failed to find string table\n");
 
 /*
 ** Populates the given elf object using the maped_file passed as param.
@@ -59,10 +58,8 @@ int elf_set_fields(elf_t *elf, void *maped_file)
 	memset(elf, 0, sizeof(elf_t));
 	elf->addr = maped_file;
 	elf->ehdr = maped_file;
-	if (!elf_validate_format(elf)) {
-		dprintf(STDERR_FILENO, "File format not recognized\n");
-		return (RETURN_ERROR);
-	}
+	if (!elf_validate_format(elf))
+		return (RETURN_ERR_FORMAT);
 	if (elf->ehdr->e_ident[EI_CLASS] == ELFCLASS64)
 		elf->sh_table = (Elf64_Shdr *) (elf->addr + elf->ehdr->e_shoff);
 	else

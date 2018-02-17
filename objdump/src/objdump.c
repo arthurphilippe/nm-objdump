@@ -82,17 +82,17 @@ static void dump_mapped_object(elf_t *elf)
 	}
 }
 
-int objdump(const char *file_name)
+int objdump(const char *file_name, const char *bin_name)
 {
 	void *map;
-	int size;
+	int size = set_map_ptr(&map, file_name);
+	int err;
 	elf_t elf;
 
-	size = set_map_ptr(&map, file_name);
-	if (size == RETURN_ERROR)
-		return (RETURN_ERROR);
-	if (elf_set_fields(&elf, map) != 0)
-		return (RETURN_ERROR);
+	if (size < RETURN_OK)
+		return (objdump_errors(size, bin_name, file_name));
+	if ((err = elf_set_fields(&elf, map)) != RETURN_OK)
+		return (objdump_errors(err, bin_name, file_name));
 	print_obj_header(&elf, file_name);
 	dump_mapped_object(&elf);
 	if (elf.ehdr->e_ident[EI_CLASS] == ELFCLASS32) {

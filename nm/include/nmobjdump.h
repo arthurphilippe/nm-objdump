@@ -25,7 +25,12 @@ typedef struct			s_elf_symbol {
 	struct s_elf_symbol	*next;
 }				elf_symbol_t;
 
-int nm(const char *file_name, int display);
+typedef struct		s_err_map {
+	const int	code;
+	const char	*f_str;
+}			err_map_t;
+
+int nm(const char *file_name, int display, const char *bin_name);
 int set_map_ptr(void **map, const char *file_name);
 int elf_set_fields(elf_t *elf, void *maped_file);
 int elf_validate_format(elf_t *elf);
@@ -41,9 +46,15 @@ void print_list(elf_symbol_t *list, int is_32bits);
 int symbol_cmp_names(const char *s1, const char *s2);
 char type_symbol(elf_t *elf, Elf64_Sym *sym);
 
+int nm_errors(int code, const char *bin_name, const char *file_name);
+
 extern const int RETURN_ERROR;
 extern const int RETURN_OK;
 extern const int FAILURE;
 extern const int SUCCESS;
+
+extern const int RETURN_ERR_STAT;
+extern const int RETURN_ERR_NO_SYMS;
+extern const int RETURN_ERR_FORMAT;
 
 #endif /* !NMOBJDUMP_H_ */
