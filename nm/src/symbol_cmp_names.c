@@ -10,14 +10,47 @@
 #include <string.h>
 #include "nmobjdump.h"
 
-static char *prepare_str(const char *str)
+static size_t strlen_spe(const char *s)
+{
+	size_t len = 0;
+	size_t off = 0;
+
+	while (s[len + off]) {
+		while (s[len + off] == '_')
+			off += 1;
+		len += 1;
+	}
+	return (len);
+}
+
+static int strcmp_spe(const char *s1, const char *s2)
+{
+	size_t i1 = 0;
+	size_t i2 = 0;
+
+	while (s1[i1] && s2[i2]) {
+		while (s1[i1] == '_')
+			i1 += 1;
+		while (s2[i2] == '_')
+			i2 += 1;
+		if (s1[i1] == s2[i2]) {
+			i1 += 1;
+			i2 += 1;
+		} else {
+			return (s1[i1] - s2[i2]);
+		}
+	}
+	return (strlen_spe(s1) - strlen_spe(s2));
+}
+
+static char *prepare_str(const char *str, int *nb_pad)
 {
 	char *outp;
 	int i = 0;
 
-	while (str[i] == '_') {
+	while (str[i] == '_')
 		i += 1;
-	}
+	*nb_pad = i;
 	outp = strdup(&str[i]);
 	if (!outp)
 		return (NULL);
@@ -30,16 +63,29 @@ static char *prepare_str(const char *str)
 	return (outp);
 }
 
-int symbol_cmp_names(const char *s1, const char *s2)
+static int typecmp(char t1, char t2)
 {
-	char *cmp1 = prepare_str(s1);
-	char *cmp2 = prepare_str(s2);
+	if (islower(t1))
+		t1 = t1 - 'a' + 'A';
+	if (islower(t2))
+		t2 = t2 - 'a' + 'A';
+	return (t1 - t2);
+}
+
+int symbol_cmp(elf_symbol_t *s1, elf_symbol_t *s2)
+{
+	int nb_pad1;
+	int nb_pad2;
+	char *cmp1 = prepare_str(s1->name, &nb_pad1);
+	char *cmp2 = prepare_str(s2->name, &nb_pad2);
 	int ret;
 
 	if (!cmp1 || !cmp2)
 		return (0);
-	ret = strcmp(cmp1, cmp2);
+	ret = strcmp_spe(cmp1, cmp2);
 	free(cmp1);
 	free(cmp2);
+	if (ret == 0)
+		return (typecmp(s1->type, s2->type));
 	return (ret);
 }

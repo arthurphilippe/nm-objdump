@@ -7,7 +7,7 @@ function diff_test {
 	if [ $? -ne 0 ]; then
 		echo "NOK"
 		RET=1
-		diff $1 $2 --color=auto
+		diff $1 $2 --color=auto -y
 		echo "***"
 		echo
 	else

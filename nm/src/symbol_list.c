@@ -34,7 +34,8 @@ int compare_and_swap_nodes(elf_symbol_t *node)
 	Elf64_Addr tmp_contents;
 	char tmp_type;
 
-	if (strcmp(node->name, node->next->name) > 0) {
+	// if (symbol_cmp_names(node->name, node->next->name) > 0) {
+	if (symbol_cmp(node, node->next) > 0) {
 		tmp = node->name;
 		node->name = node->next->name;
 		node->next->name = tmp;
