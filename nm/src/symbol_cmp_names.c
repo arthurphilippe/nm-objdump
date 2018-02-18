@@ -86,6 +86,8 @@ int symbol_cmp(elf_symbol_t *s1, elf_symbol_t *s2)
 	free(cmp1);
 	free(cmp2);
 	if (ret == 0)
+		ret = strlen_spe(s1->name) - strlen_spe(s2->name);
+	if (ret == 0)
 		return (typecmp(s1->type, s2->type));
 	return (ret);
 }

@@ -58,6 +58,15 @@ EXP_RET=$?
 diff_test tests/test.log tests/testcomp.log $MY_RET $EXP_RET
 rm tests/test.log tests/testcomp.log
 
+echo -ne ":: nm\t\tRunning .o test... "
+
+./my_nm objdump/src/objdump.o &>tests/test.log
+MY_RET=$?
+nm objdump/src/objdump.o &>tests/testcomp.log
+EXP_RET=$?
+
+diff_test tests/test.log tests/testcomp.log $MY_RET $EXP_RET
+rm tests/test.log tests/testcomp.log
 
 echo -ne ":: objdump\tRunning invalid file test... "
 
