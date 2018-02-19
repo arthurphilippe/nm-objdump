@@ -107,4 +107,4 @@ rm tests/test.log tests/testcomp.log
 # diff_test tests/test.log tests/testcomp.log $MY_RET $EXP_RET
 # rm tests/test.log tests/testcomp.log
 
-exit $RET
+# exit $RET
