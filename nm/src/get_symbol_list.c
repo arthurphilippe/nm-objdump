@@ -9,6 +9,10 @@
 #include <stddef.h>
 #include "nmobjdump.h"
 
+/*
+** If the file is in 32bits format, the entired symtab is fitted into
+** a 64bits symtab sctruct.
+*/
 static Elf64_Sym *get_fitted_symtab(Elf32_Sym *src, size_t count)
 {
 	size_t i = 0;
@@ -26,6 +30,9 @@ static Elf64_Sym *get_fitted_symtab(Elf32_Sym *src, size_t count)
 	return (dest);
 }
 
+/*
+** Uses this idx paramater to get the symtab that follows.
+*/
 static void get_next_symtab(elf_t *elf, Elf64_Shdr **sh_symtab,
 				Elf64_Sym **symtab, size_t *idx)
 {
@@ -43,6 +50,10 @@ static void get_next_symtab(elf_t *elf, Elf64_Shdr **sh_symtab,
 	*symtab = NULL;
 }
 
+/*
+** Handles the sorting will the list isn't sorted.
+** It isn't clear how different versions of nm sort tho...
+*/
 void sort_symbol_list(elf_symbol_t **head)
 {
 	elf_symbol_t *curr;
@@ -56,6 +67,9 @@ void sort_symbol_list(elf_symbol_t **head)
 	}
 }
 
+/*
+** Handles the creation of the symbol list.
+*/
 elf_symbol_t *get_symbol_list(elf_t *elf)
 {
 	elf_symbol_t *list = NULL;

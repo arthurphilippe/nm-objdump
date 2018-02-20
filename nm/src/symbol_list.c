@@ -10,6 +10,9 @@
 #include <string.h>
 #include "nmobjdump.h"
 
+/*
+** Prints all of the stored symbols.
+*/
 void print_list(elf_symbol_t *list, int is_32bits)
 {
 	while (list) {
@@ -28,13 +31,15 @@ void print_list(elf_symbol_t *list, int is_32bits)
 	}
 }
 
+/*
+** Swaps nodes if they are not ordered.
+*/
 int compare_and_swap_nodes(elf_symbol_t *node)
 {
 	char *tmp;
 	Elf64_Addr tmp_contents;
 	char tmp_type;
 
-	// if (symbol_cmp_names(node->name, node->next->name) > 0) {
 	if (symbol_cmp(node, node->next) > 0) {
 		tmp = node->name;
 		node->name = node->next->name;
@@ -50,6 +55,9 @@ int compare_and_swap_nodes(elf_symbol_t *node)
 	return (0);
 }
 
+/*
+** Creates a symbol node.
+*/
 elf_symbol_t *new_node(Elf64_Addr contents, char *name, char type)
 {
 	elf_symbol_t *new = malloc(sizeof(elf_symbol_t));
@@ -65,6 +73,9 @@ elf_symbol_t *new_node(Elf64_Addr contents, char *name, char type)
 	return (new);
 }
 
+/*
+** Adds a symbol to the tail of the list.
+*/
 void symbol_list_pushback(elf_symbol_t **head, elf_symbol_t *symbol)
 {
 	elf_symbol_t *curr;
@@ -81,6 +92,9 @@ void symbol_list_pushback(elf_symbol_t **head, elf_symbol_t *symbol)
 	curr->next = symbol;
 }
 
+/*
+** Frees the entiered list; recursivly.
+*/
 void symbol_list_destroy(elf_symbol_t *list)
 {
 	if (list->next)

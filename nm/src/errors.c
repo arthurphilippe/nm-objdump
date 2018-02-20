@@ -35,6 +35,9 @@ const err_map_t ERRORS[] = {
 	{0, NULL},
 };
 
+/*
+** looks up an input error in the error map.
+*/
 int nm_errors(int code, const char *bin_name, const char *file_name)
 {
 	size_t i = 0;

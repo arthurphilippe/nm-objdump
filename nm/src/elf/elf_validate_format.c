@@ -7,6 +7,9 @@
 
 #include "nmobjdump.h"
 
+/*
+** Checks that the files being parsed is actually an ELF file
+*/
 int elf_validate_format(elf_t *elf)
 {
 	char *e_ident = (char *) elf->ehdr->e_ident;

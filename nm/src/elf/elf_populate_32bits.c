@@ -10,6 +10,9 @@
 #include <stdlib.h>
 #include "nmobjdump.h"
 
+/*
+** Copies the 32bits source header to a 64bits destination header.
+*/
 static void elf_cpy_header(Elf32_Ehdr *src, Elf64_Ehdr *dest)
 {
 	memcpy(dest->e_ident, src->e_ident, EI_NIDENT);
@@ -27,6 +30,9 @@ static void elf_cpy_header(Elf32_Ehdr *src, Elf64_Ehdr *dest)
 	dest->e_shstrndx = src->e_shstrndx;
 }
 
+/*
+** Duplicates the 32bits source sh_table in a 64bits sh_table.
+*/
 static Elf64_Shdr *elf_dup_sh_table(Elf32_Ehdr *src)
 {
 	size_t idx = 0;
@@ -53,6 +59,9 @@ static Elf64_Shdr *elf_dup_sh_table(Elf32_Ehdr *src)
 	return (sht_dest);
 }
 
+/*
+** Populate elf field by converting the 32 bit source header.
+*/
 int elf_populate_32bits(elf_t *elf)
 {
 	Elf32_Ehdr *src = (Elf32_Ehdr *) elf->addr;

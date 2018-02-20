@@ -9,6 +9,10 @@
 #include "symbol_is_from_section.h"
 #include "symbol_type_change_case.h"
 
+/*
+** The following functions are serving the sole purpose
+** of detecting a symbol type.
+*/
 char type_functor_absolute(elf_t *elf, Elf64_Sym *sym)
 {
 	(void) elf;

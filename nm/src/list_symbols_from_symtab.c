@@ -9,6 +9,9 @@
 #include "nmobjdump.h"
 #include "symbol_is_printable.h"
 
+/*
+** Gather the symbols from the current symtab
+*/
 void list_symbols_from_systab(elf_t *elf, Elf64_Shdr *sh_symtab,
 				Elf64_Sym *symtab, elf_symbol_t **head)
 {

@@ -13,6 +13,9 @@
 #include "errno.h"
 #include "nmobjdump.h"
 
+/*
+** Maps the file into memory.
+*/
 int set_map_ptr(void **map, const char *file_name)
 {
 	int fd = open(file_name, O_RDONLY);

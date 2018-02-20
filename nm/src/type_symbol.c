@@ -22,6 +22,9 @@ char (*const TYPE_FUNCTORS[]) (elf_t *elf, Elf64_Sym *sym) = {
 	NULL,
 };
 
+/*
+** Types a given symbols using all the typing functors at disposal.
+*/
 char type_symbol(elf_t *elf, Elf64_Sym *sym)
 {
 	char ret;

@@ -10,6 +10,10 @@
 #include <string.h>
 #include "nmobjdump.h"
 
+/*
+** Computes the len of the string in a similar way nm does.
+** Tho it is not certain that it is the right way.
+*/
 static size_t strlen_spe(const char *s)
 {
 	size_t len = 0;
@@ -23,6 +27,10 @@ static size_t strlen_spe(const char *s)
 	return (len);
 }
 
+/*
+** Compates the string in the same fashion as nm in most cases.
+** Some oddities are yet to be solved.
+*/
 static int strcmp_spe(const char *s1, const char *s2)
 {
 	size_t i1 = 0;
@@ -43,6 +51,10 @@ static int strcmp_spe(const char *s1, const char *s2)
 	return (strlen_spe(s1) - strlen_spe(s2));
 }
 
+/*
+** Prepares the string for comparaison stripping it of its first '_'
+** and by discarding the letters' case.
+*/
 static char *prepare_str(const char *str, int *nb_pad)
 {
 	char *outp;
@@ -63,6 +75,9 @@ static char *prepare_str(const char *str, int *nb_pad)
 	return (outp);
 }
 
+/*
+** Compare symbols types.
+*/
 static int typecmp(char t1, char t2)
 {
 	if (islower(t1))
@@ -72,6 +87,9 @@ static int typecmp(char t1, char t2)
 	return (t1 - t2);
 }
 
+/*
+** Orchestrates the entire comparaision proccess.
+*/
 int symbol_cmp(elf_symbol_t *s1, elf_symbol_t *s2)
 {
 	int nb_pad1;
