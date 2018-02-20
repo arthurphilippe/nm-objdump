@@ -50,7 +50,7 @@ static void dump_section_contents(Elf64_Shdr *shdr, char *section)
 
 	translated_buff[16] = 0;
 	while (section_idx < shdr->sh_size) {
-		if (shdr->sh_size < 0xffff)
+		if (shdr->sh_addr + shdr->sh_size < 0xffff)
 			printf(" %04x", (unsigned int) (shdr->sh_addr +
 				section_idx));
 		else

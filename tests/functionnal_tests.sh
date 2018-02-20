@@ -7,7 +7,7 @@ function diff_test {
 	if [ $? -ne 0 ]; then
 		echo "NOK"
 		RET=1
-		diff $1 $2 --color=auto -y
+		diff $1 $2 --color=auto
 		echo "***"
 		echo
 	else
@@ -79,9 +79,9 @@ ret_test $EXP_RET $MY_RET
 
 echo -ne ":: objdump\tRunning 64bits executable test... "
 
-./my_objdump my_objdump &>tests/test.log
+./my_objdump /usr/bin/bash &>tests/test.log
 MY_RET=$?
-objdump -s -f my_objdump &>tests/testcomp.log
+objdump -s -f /usr/bin/bash &>tests/testcomp.log
 EXP_RET=$?
 
 diff_test tests/test.log tests/testcomp.log $MY_RET $EXP_RET
