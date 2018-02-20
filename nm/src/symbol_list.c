@@ -23,8 +23,11 @@ void print_list(elf_symbol_t *list, int is_32bits)
 			printf("%08lx %c %s\n", list->contents, list->type,
 				list->name);
 		}
-		else
+		else if (!is_32bits)
 			printf("                 %c %s\n", list->type,
+				list->name);
+		else
+			printf("         %c %s\n", list->type,
 				list->name);
 
 		list = list->next;

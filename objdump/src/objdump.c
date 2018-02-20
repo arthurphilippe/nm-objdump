@@ -50,7 +50,12 @@ static void dump_section_contents(Elf64_Shdr *shdr, char *section)
 
 	translated_buff[16] = 0;
 	while (section_idx < shdr->sh_size) {
-		printf(" %04x", (unsigned int) (shdr->sh_addr + section_idx));
+		if (shdr->sh_size < 0xffff)
+			printf(" %04x", (unsigned int) (shdr->sh_addr +
+				section_idx));
+		else
+			printf(" %05x", (unsigned int) (shdr->sh_addr +
+				section_idx));
 		memset(translated_buff, ' ', 16);
 		i = 0;
 		while (i < 16 && section_idx + i < shdr->sh_size) {
