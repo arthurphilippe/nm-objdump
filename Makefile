@@ -40,11 +40,11 @@ tests_run: tests
 
 $(NM):
 	@$(MAKE) nm -C nm/
-	@ln -sf nm/nm $(NM)
+	@cp nm/nm $(NM)
 
 $(OBJDUMP):
 	@$(MAKE) objdump -C objdump/
-	@ln -sf objdump/objdump $(OBJDUMP)
+	@cp objdump/objdump $(OBJDUMP)
 
 clean:
 	@$(MAKE) clean -C nm/
