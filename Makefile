@@ -7,9 +7,9 @@
 
 RM		=	rm -vf
 
-NM		=	nm
+NM		=	my_nm
 
-OBJDUMP		=	objdump
+OBJDUMP		=	my_objdump
 
 CFLAGS		=	-W -Wextra -Wall -Iinclude/
 
@@ -17,15 +17,14 @@ ifndef VERBOSE
 	MAKEFLAGS	+=	--no-print-directory
 endif
 
-all: $(OBJDUMP)
-all: $(NM)
+all: objdump
+all: nm
 
 debug: fclean
 	@$(MAKE) debug -C nm/
 	@ln -sf nm/nm $(NM)
 	@$(MAKE) debug -C objdump/
 	@ln -sf objdump/objdump $(OBJDUMP)
-
 
 tests: CC=gcc
 tests:
@@ -34,15 +33,14 @@ tests:
 	@$(MAKE) objdump -C objdump/
 	@ln -sf objdump/objdump $(OBJDUMP)
 
-
 tests_run: tests
 	@./$(TEST)
 
-$(NM):
+nm:
 	@$(MAKE) nm -C nm/
 	@cp nm/nm $(NM)
 
-$(OBJDUMP):
+objdump:
 	@$(MAKE) objdump -C objdump/
 	@cp objdump/objdump $(OBJDUMP)
 
@@ -58,4 +56,4 @@ fclean:
 
 re: fclean all
 
-.PHONY: all clean fclean re debug tests $(NM) $(OBJDUMP)
+.PHONY: all clean fclean re debug tests nm objdump
