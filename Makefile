@@ -7,9 +7,9 @@
 
 RM		=	rm -vf
 
-NM		=	my_nm
+NM		=	nm
 
-OBJDUMP		=	my_objdump
+OBJDUMP		=	objdump
 
 CFLAGS		=	-W -Wextra -Wall -Iinclude/
 
