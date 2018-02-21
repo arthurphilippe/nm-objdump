@@ -35,7 +35,6 @@ static void elf_cpy_header(Elf32_Ehdr *src, Elf64_Ehdr *dest)
 */
 static Elf64_Shdr *elf_dup_sh_table(Elf32_Ehdr *src)
 {
-	size_t idx = 0;
 	Elf32_Shdr *sht_src = (Elf32_Shdr *) (((char *) src) + src->e_shoff);
 	Elf64_Shdr *sht_dest = malloc(sizeof(Elf64_Shdr) * src->e_shnum);
 
@@ -43,7 +42,7 @@ static Elf64_Shdr *elf_dup_sh_table(Elf32_Ehdr *src)
 		perror("memory");
 		return (sht_dest);
 	}
-	while (idx < src->e_shnum) {
+	for (size_t idx = 0; idx < src->e_shnum; idx += 1) {
 		sht_dest[idx].sh_name = sht_src[idx].sh_name;
 		sht_dest[idx].sh_type = sht_src[idx].sh_type;
 		sht_dest[idx].sh_flags = sht_src[idx].sh_flags;
@@ -54,7 +53,6 @@ static Elf64_Shdr *elf_dup_sh_table(Elf32_Ehdr *src)
 		sht_dest[idx].sh_info = sht_src[idx].sh_info;
 		sht_dest[idx].sh_addralign = sht_src[idx].sh_addralign;
 		sht_dest[idx].sh_entsize = sht_src[idx].sh_entsize;
-		idx += 1;
 	}
 	return (sht_dest);
 }
