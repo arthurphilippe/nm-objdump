@@ -9,7 +9,7 @@
 #include "nmobjdump.h"
 #include "print_obj_flags.h"
 
-// UNUSED SOURCE FILE
+/* UNUSED SOURCE FILE */
 
 const int EXEC_P = 0x02;
 const int DYNAMIC = 0x40;
