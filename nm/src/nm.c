@@ -11,11 +11,7 @@
 #include <unistd.h>
 #include <sys/mman.h>
 #include "nmobjdump.h"
-
-const int FAILURE = 1;
-const int SUCCESS = 0;
-const int RETURN_OK = 0;
-const int RETURN_ERROR = -1;
+#include "nm_errors.h"
 
 void display(elf_t *elf, const char *file_name)
 {

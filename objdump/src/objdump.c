@@ -15,11 +15,6 @@
 #include "section_is_to_print.h"
 #include "print_byte.h"
 
-const int FAILURE = 1;
-const int SUCCESS = 0;
-const int RETURN_ERROR = -1;
-const int RETURN_OK = 0;
-
 static int dump_sub_line(char *buffer, size_t tot_off,
 				Elf64_Shdr *shdr, char *section)
 {
@@ -95,9 +90,9 @@ int objdump(const char *file_name, const char *bin_name)
 	elf_t elf;
 
 	if (size < RETURN_OK)
-		return (objdump_errors(size, bin_name, file_name));
+		return (nm_errors(size, bin_name, file_name));
 	if ((err = elf_set_fields(&elf, map)) != RETURN_OK)
-		return (objdump_errors(err, bin_name, file_name));
+		return (nm_errors(err, bin_name, file_name));
 	print_obj_header(&elf, file_name);
 	dump_mapped_object(&elf);
 	if (elf.ehdr->e_ident[EI_CLASS] == ELFCLASS32) {

@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "nmobjdump.h"
+#include "nm_errors.h"
 
 int set_map_ptr(void **map, const char *file_name)
 {

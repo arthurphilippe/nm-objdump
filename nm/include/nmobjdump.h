@@ -9,6 +9,13 @@
 	#define NMOBJDUMP_H_
 
 	#include <elf.h>
+	#define FAILURE 1
+	#define SUCCESS 0
+	#define RETURN_OK 0
+	#define RETURN_ERROR -1
+	#define DEFAULT_FILE_NAME "a.out"
+	#define DISPLAY_NAME 1
+	#define DONT_DISPLAY_NAME 0
 
 typedef struct		s_elf {
 	char		*addr;
@@ -47,14 +54,5 @@ char type_symbol(elf_t *elf, Elf64_Sym *sym);
 int symbol_cmp(elf_symbol_t *s1, elf_symbol_t *s2);
 
 int nm_errors(int code, const char *bin_name, const char *file_name);
-
-extern const int RETURN_ERROR;
-extern const int RETURN_OK;
-extern const int FAILURE;
-extern const int SUCCESS;
-
-extern const int RETURN_ERR_STAT;
-extern const int RETURN_ERR_NO_SYMS;
-extern const int RETURN_ERR_FORMAT;
 
 #endif /* !NMOBJDUMP_H_ */

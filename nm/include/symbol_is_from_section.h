@@ -11,11 +11,14 @@
 	#include "nmobjdump.h"
 	#include "string.h"
 
-inline static int symbol_is_from_section(Elf64_Sym *sym, elf_t *elf,
+inline static int symbol_is_from_section(Elf64_Sym *y, elf_t *e,
 						const char *s)
 {
-	return (!strcmp(&(elf->sh_string_table)
-			[elf->sh_table[sym->st_shndx].sh_name], s));
+	int r;
+
+	r = !strcmp(&(e->sh_string_table)[e->sh_table[y->st_shndx].sh_name],
+			s);
+	return (r);
 }
 
 #endif /* !SYMBOL_IS_FROM_SECTION_H_ */

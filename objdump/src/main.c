@@ -6,10 +6,7 @@
 */
 
 #include "nmobjdump.h"
-
-const char *DEFAULT_FILE_NAME = "a.out";
-const int DISPLAY_NAME = 1;
-const int DONT_DISPLAY_NAME = 0;
+#include "nm_errors.h"
 
 int objdump_launcher(int ac, char **av)
 {

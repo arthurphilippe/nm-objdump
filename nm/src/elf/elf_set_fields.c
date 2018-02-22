@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include <string.h>
 #include "nmobjdump.h"
+#include "nm_errors.h"
 
 /*
 ** Comes after the setting the sh table.

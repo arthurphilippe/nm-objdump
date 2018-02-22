@@ -12,6 +12,7 @@
 #include <unistd.h>
 #include "errno.h"
 #include "nmobjdump.h"
+#include "nm_errors.h"
 
 /*
 ** Maps the file into memory.

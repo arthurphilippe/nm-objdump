@@ -9,6 +9,13 @@
 	#define OBJDUMP_H_
 
 	#include <elf.h>
+	#define FAILURE 1
+	#define SUCCESS 0
+	#define RETURN_OK 0
+	#define RETURN_ERROR -1
+	#define DEFAULT_FILE_NAME "a.out"
+	#define DISPLAY_NAME 1
+	#define DONT_DISPLAY_NAME 0
 
 typedef struct		s_elf {
 	char		*addr;
@@ -37,14 +44,6 @@ void print_obj_header(elf_t *elf, const char *file_name);
 const char *get_target_arch(int machine);
 int elf_populate_32bits(elf_t *elf);
 
-int objdump_errors(int code, const char *bin_name, const char *file_name);
-
-extern const int RETURN_ERROR;
-extern const int RETURN_OK;
-extern const int FAILURE;
-extern const int SUCCESS;
-
-extern const int RETURN_ERR_STAT;
-extern const int RETURN_ERR_FORMAT;
+int nm_errors(int code, const char *bin_name, const char *file_name);
 
 #endif /* !OBJDUMP_H_ */
