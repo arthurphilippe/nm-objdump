@@ -16,10 +16,10 @@
 void print_list(elf_symbol_t *list, int is_32bits)
 {
 	while (list) {
-		if (list->contents != 0 && !is_32bits)
+		if (list->type != 'w' && list->type != 'U' && !is_32bits)
 			printf("%016lx %c %s\n", list->contents, list->type,
 				list->name);
-		else if (list->contents != 0) {
+		else if (list->type != 'w' && list->type != 'U') {
 			printf("%08lx %c %s\n", list->contents, list->type,
 				list->name);
 		}
