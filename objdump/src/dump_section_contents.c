@@ -39,6 +39,9 @@ static void print_line_offset(Elf64_Shdr *shdr, int section_idx)
 	if (shdr->sh_addr + shdr->sh_size < 0xffff)
 		printf(" %04x", (unsigned int) (shdr->sh_addr +
 			section_idx));
+	else if (shdr->sh_addr + shdr->sh_size < 0xfffff)
+		printf(" %05x", (unsigned int) (shdr->sh_addr +
+			section_idx));
 	else
 		printf(" %05x", (unsigned int) (shdr->sh_addr +
 			section_idx));
