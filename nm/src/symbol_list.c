@@ -11,30 +11,6 @@
 #include "nmobjdump.h"
 
 /*
-** Prints all of the stored symbols.
-*/
-void print_list(elf_symbol_t *list, int is_32bits)
-{
-	while (list) {
-		if (list->type != 'w' && list->type != 'U' && !is_32bits)
-			printf("%016lx %c %s\n", list->contents, list->type,
-				list->name);
-		else if (list->type != 'w' && list->type != 'U') {
-			printf("%08lx %c %s\n", list->contents, list->type,
-				list->name);
-		}
-		else if (!is_32bits)
-			printf("                 %c %s\n", list->type,
-				list->name);
-		else
-			printf("         %c %s\n", list->type,
-				list->name);
-
-		list = list->next;
-	}
-}
-
-/*
 ** Swaps nodes if they are not ordered.
 */
 int compare_and_swap_nodes(elf_symbol_t *node)

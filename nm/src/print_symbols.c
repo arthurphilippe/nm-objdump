@@ -21,12 +21,11 @@ void print_list32(elf_symbol_t *list)
 				list->name);
 		list = list->next;
 	}
-
 }
 
 void print_list64(elf_symbol_t *list)
 {
-		while (list) {
+	while (list) {
 		if (list->type != 'w' && list->type != 'U')
 			printf("%016lx %c %s\n", list->contents, list->type,
 				list->name);
@@ -35,5 +34,4 @@ void print_list64(elf_symbol_t *list)
 				list->name);
 		list = list->next;
 	}
-
 }
