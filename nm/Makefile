@@ -25,7 +25,8 @@ SRCS		=	src/nm.c			\
 			src/type_symbol.c		\
 			src/typing/type_functors1.c	\
 			src/typing/type_functors2.c	\
-			src/errors.c
+			src/errors.c			\
+			src/print_symbols.c
 
 OBJ_MAIN	=	$(MAIN:.c=.o)
 

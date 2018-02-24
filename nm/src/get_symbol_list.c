@@ -89,6 +89,6 @@ elf_symbol_t *get_symbol_list(elf_t *elf)
 			list_symbols_from_systab(elf, sh_symtab, symtab, &list);
 		get_next_symtab(elf, &sh_symtab, &symtab, &idx_symtab);
 	}
-	// sort_symbol_list(&list);
 	return (list);
 }
+/* sort_symbol_list(&list); */

@@ -20,7 +20,10 @@ void display(elf_t *elf, const char *file_name)
 	if (list) {
 		if (file_name)
 			printf("\n%s:\n", file_name);
-		print_list(list, (elf->ehdr->e_ident[EI_CLASS] == ELFCLASS32));
+		if (elf->ehdr->e_ident[EI_CLASS] == ELFCLASS32)
+			print_list32(list);
+		else
+			print_list64(list);
 		symbol_list_destroy(list);
 	}
 }

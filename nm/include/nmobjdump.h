@@ -50,6 +50,8 @@ void list_symbols_from_systab(elf_t *elf, Elf64_Shdr *sh_symtab,
 elf_symbol_t *get_symbol_list(elf_t *elf);
 int compare_and_swap_nodes(elf_symbol_t *node);
 void print_list(elf_symbol_t *list, int is_32bits);
+void print_list32(elf_symbol_t *list);
+void print_list64(elf_symbol_t *list);
 char type_symbol(elf_t *elf, Elf64_Sym *sym);
 int symbol_cmp(elf_symbol_t *s1, elf_symbol_t *s2);
 
