@@ -43,7 +43,7 @@ int elf_set_fields(elf_t *elf, void *maped_file);
 void print_obj_header(elf_t *elf, const char *file_name);
 const char *get_target_arch(int machine);
 int elf_populate_32bits(elf_t *elf);
-
 int nm_errors(int code, const char *bin_name, const char *file_name);
+void dump_section_contents(Elf64_Shdr *shdr, char *section);
 
 #endif /* !OBJDUMP_H_ */

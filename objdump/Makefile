@@ -20,7 +20,8 @@ SRCS		=	src/objdump.c			\
 			src/elf/elf_populate_32bits.c	\
 			src/print_obj_header.c		\
 			src/get_target_arch.c		\
-			src/errors.c
+			src/errors.c			\
+			src/dump_section_contents.c
 
 OBJ_MAIN	=	$(MAIN:.c=.o)
 
