@@ -30,6 +30,9 @@ const arch_map_t ARCHS[] = {
 	{EM_VAX, "VAX"}
 };
 
+/*
+** Returns a const string containing the name of the current arch.
+*/
 const char *get_target_arch(int machine)
 {
 	int i = 0;

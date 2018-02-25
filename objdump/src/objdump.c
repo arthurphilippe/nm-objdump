@@ -12,6 +12,10 @@
 #include "nmobjdump.h"
 #include "section_is_to_print.h"
 
+/*
+** Iterates over all of the sections of the current object
+** to display them.
+*/
 static void dump_mapped_object(elf_t *elf)
 {
 	size_t i = 0;
@@ -29,6 +33,9 @@ static void dump_mapped_object(elf_t *elf)
 	}
 }
 
+/*
+** Orchestrate the whole process of dumping an elf file.
+*/
 int objdump(const char *file_name, const char *bin_name)
 {
 	void *map;

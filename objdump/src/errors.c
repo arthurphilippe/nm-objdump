@@ -9,6 +9,9 @@
 #include "nmobjdump.h"
 #include "nm_errors.h"
 
+/*
+** Manages errors.
+*/
 int nm_errors(int code, const char *bin_name, const char *file_name)
 {
 	static const err_map_t errors[] = {

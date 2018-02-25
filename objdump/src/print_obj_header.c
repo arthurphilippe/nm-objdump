@@ -8,6 +8,9 @@
 #include <stdio.h>
 #include "nmobjdump.h"
 
+/*
+** Prints the header flags associated with the current object.
+*/
 static void print_obj_flags(elf_t *elf)
 {
 	int	sum[ET_NUM];
@@ -29,6 +32,9 @@ static void print_obj_flags(elf_t *elf)
 	}
 }
 
+/*
+** Prints the header associated with the current object.
+*/
 void print_obj_header(elf_t *elf, const char *file_name)
 {
 	printf("\n%s:     file format ", file_name);

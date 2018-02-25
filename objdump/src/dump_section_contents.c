@@ -12,6 +12,9 @@
 #include "nmobjdump.h"
 #include "print_byte.h"
 
+/*
+** Dumps a line to the std output.
+*/
 static int dump_sub_line(char *buffer, size_t tot_off,
 				Elf64_Shdr *shdr, char *section)
 {
@@ -24,6 +27,9 @@ static int dump_sub_line(char *buffer, size_t tot_off,
 	return (i);
 }
 
+/*
+** If a line wasn't long enough, fill the rest with spaces.
+*/
 static void fill_out_empty_space(size_t printed)
 {
 	size_t nb_block = (16 - printed) / 4;
@@ -34,6 +40,9 @@ static void fill_out_empty_space(size_t printed)
 	write(1, spaces_str, nb_char + nb_block);
 }
 
+/*
+** Prints the offset before a line.
+*/
 static void print_line_offset(Elf64_Shdr *shdr, int section_idx)
 {
 	if (shdr->sh_addr + shdr->sh_size < 0xffff)
@@ -47,6 +56,9 @@ static void print_line_offset(Elf64_Shdr *shdr, int section_idx)
 			section_idx));
 }
 
+/*
+** Takes care of the complete display of a sections's content.
+*/
 void dump_section_contents(Elf64_Shdr *shdr, char *section)
 {
 	char translated_buff[17];

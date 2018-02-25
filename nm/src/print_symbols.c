@@ -8,7 +8,9 @@
 #include <stdio.h>
 #include "nmobjdump.h"
 
-
+/*
+** Prints the symbols using 32 bits format.
+*/
 void print_list32(elf_symbol_t *list)
 {
 	while (list) {
@@ -23,6 +25,9 @@ void print_list32(elf_symbol_t *list)
 	}
 }
 
+/*
+** Prints the symbols using 64 bits format.
+*/
 void print_list64(elf_symbol_t *list)
 {
 	while (list) {

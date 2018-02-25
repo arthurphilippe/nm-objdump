@@ -13,6 +13,9 @@
 #include "nmobjdump.h"
 #include "nm_errors.h"
 
+/*
+** Dumps the symbols after checking the format.
+*/
 void display(elf_t *elf, const char *file_name)
 {
 	elf_symbol_t *list = get_symbol_list(elf);
@@ -28,6 +31,9 @@ void display(elf_t *elf, const char *file_name)
 	}
 }
 
+/*
+** Orchestrates the complete process of showing the object's symbols.
+*/
 int nm(const char *file_name, int display_file_name, const char *bin_name)
 {
 	void *map;

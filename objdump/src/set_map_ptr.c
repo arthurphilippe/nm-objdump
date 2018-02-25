@@ -13,6 +13,9 @@
 #include "nmobjdump.h"
 #include "nm_errors.h"
 
+/*
+** Maps a file into memory and sets a pointer to it.
+*/
 int set_map_ptr(void **map, const char *file_name)
 {
 	int fd = open(file_name, O_RDONLY);

@@ -52,7 +52,7 @@ fclean:
 	@$(MAKE) fclean -C nm/
 	@$(MAKE) fclean -C objdump/
 	@$(RM) $(NM) $(OBJDUMP) > /dev/null
-	@printf "[\033[0;31mdeletion\033[0m][symlinks]% 30s\n" "$(NM)^$(OBJDUMP)" | tr " " "." | tr "^" " "
+	@printf "[\033[0;31mdeletion\033[0m][copies]% 32s\n" "$(NM)^$(OBJDUMP)" | tr " " "." | tr "^" " "
 
 re: fclean all
 
